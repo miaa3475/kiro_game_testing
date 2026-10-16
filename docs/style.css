@@ -3,10 +3,14 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
+  min-height: 100dvh;
   margin: 0;
 }
 
 canvas {
   display: block;
+  width: min(480px, 100vw, 75vh);
+  width: min(480px, 100vw, 75dvh);
+  height: auto;
 }

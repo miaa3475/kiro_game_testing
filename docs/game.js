@@ -222,6 +222,9 @@ const Renderer = {
       ctx.textAlign = 'center';
       ctx.fillText('\u4e09\u7dda\u8de8\u9177', CANVAS_WIDTH/2, CANVAS_HEIGHT/2 - 60);
       this._drawButton(ctx, '\u958b\u59cb\u904a\u6232', CANVAS_WIDTH/2, CANVAS_HEIGHT/2 + 20);
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = '20px sans-serif';
+      ctx.fillText('← / → 方向鍵：左右切換跑道', CANVAS_WIDTH/2, CANVAS_HEIGHT/2 + 85);
       ctx.textAlign = 'left';
     } else if (state === STATE.GAME_OVER) {
       this._drawSemitransparentOverlay(ctx);
@@ -273,8 +276,8 @@ InputHandler.init(GameState.player, GameState);
 // Canvas click handler (Task 7.7)
 canvas.addEventListener('click', (e) => {
   const rect = canvas.getBoundingClientRect();
-  const mx = e.clientX - rect.left;
-  const my = e.clientY - rect.top;
+  const mx = (e.clientX - rect.left) * (CANVAS_WIDTH / rect.width);
+  const my = (e.clientY - rect.top) * (CANVAS_HEIGHT / rect.height);
   for (const [label, btn] of Object.entries(UI_BUTTONS)) {
     if (mx >= btn.x && mx <= btn.x + btn.w && my >= btn.y && my <= btn.y + btn.h) {
       if (label === '\u958b\u59cb\u904a\u6232' && GameState.status === STATE.IDLE) {
